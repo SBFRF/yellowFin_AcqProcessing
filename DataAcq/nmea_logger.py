@@ -5,7 +5,8 @@ import logging
 from datetime import date
 from setSysClockFromGGA import setClockfromGGA
 
-serialPort = '/dev/ttyACM1'
+serialPort = '/dev/tty_reach_m2'
+data_path_out = '/data/nmeadata'
 setClockfromGGA(serialPort)
 
 BUFFER_SIZE = 100
@@ -18,13 +19,13 @@ with serial.Serial(port=serialPort, baudrate=115200, bytesize=8,
     currTS2 = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
     today = date.today()
     d4 = today.strftime("%m-%d-%Y")
-    path = f"./Data/nmeadata/{d4}"
+    path = f"{data_path_out}/{d4}"
     
     if not os.path.exists(path):
         os.makedirs(path)
         logging.info(f"Made Directory {path}")
     
-    file_name = f"./Data/nmeadata/{d4}/{currTS2}.dat"
+    file_name = f"{data_path_out}/{d4}/{currTS2}.dat"
     file1 = open(file_name, 'w')
     buffer = []
 
@@ -39,7 +40,7 @@ with serial.Serial(port=serialPort, baudrate=115200, bytesize=8,
 
             file1.close()
             currTS2 = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
-            file_name = f"./Data/nmeadata/{d4}/{currTS2}.dat"
+            file_name = f"{data_path_out}/{d4}/{currTS2}.dat"
             file1 = open(file_name, 'w')
 
     if buffer:

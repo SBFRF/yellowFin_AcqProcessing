@@ -8,10 +8,10 @@ import math
 from datetime import date
 # might need
 #sudo adduser newuser dialout
-
+sonar_serial = '/dev/ttyAC0'
 #sonar
 serialPort = serial.Serial(
-port='/dev/ttyACM0', baudrate=115200, bytesize=8, timeout=2, stopbits=serial.STOPBITS_ONE
+port=sonar_serial, baudrate=115200, bytesize=8, timeout=2, stopbits=serial.STOPBITS_ONE
 )
 serialString = ""  # Used to hold data coming over UART
 
